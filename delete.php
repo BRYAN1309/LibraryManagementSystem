@@ -1,8 +1,7 @@
 <?php
 session_start();
-include "connection.php";
-include "header.php"
-
+include "connection.php"; // Ensure this file correctly sets $link
+include "header.php";
 ?>
 
 <!DOCTYPE html>
@@ -10,10 +9,9 @@ include "header.php"
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Delete Book</title>
     <link rel="stylesheet" href="styles/output.css">
     <script src="https://unpkg.com/@tailwindcss/browser@4"></script>
-    </head>
 </head>
 <body>
 <div class="fixed inset-0 flex items-center justify-center">
@@ -38,7 +36,7 @@ include "header.php"
             </svg>
             <h3 class="text-xl font-normal text-gray-500 mt-5 mb-6">Are you sure you want to delete this book?</h3>
             <form method="POST" action="">
-                <input type="hidden" name="book_id" value="<?php echo $_GET['bookId']; ?>">
+                <input type="hidden" name="book_id" value="<?php echo isset($_GET['bookId']) ? htmlspecialchars($_GET['bookId']) : ''; ?>">
                 <button type="submit" name="delete"
                     class="text-white bg-red-600 hover:bg-red-800 focus:ring-4 focus:ring-red-300 font-medium rounded-lg text-base inline-flex items-center px-3 py-2.5 text-center mr-2">
                     Yes, I'm sure
@@ -52,29 +50,33 @@ include "header.php"
     </div>
 </div>
 
-
 </body>
 </html>
+
 <?php
+if (isset($_POST["delete"])) {
+    if (!empty($_POST['book_id'])) {
+        include "connection.php"; // Make sure $link is available
 
+        $book_id = intval($_POST['book_id']); // Ensure it's an integer for safety
 
-
-if (isset($_POST["delete"])){
-if (isset($_GET['id'])) {
-    $book_id = $_GET['id'];
-    $query = "DELETE FROM book WHERE bookId = ?";
-    $stmt = mysqli_prepare($link, $query);
-    mysqli_stmt_bind_param($stmt, "i", $book_id);
-
-    if (mysqli_stmt_execute($stmt)) {
-        echo "<script>alert('Book deleted successfully!'); window.location.href='dashboard.php';</script>";
+        // Prepare the delete statement
+        $query = "DELETE FROM book WHERE bookId = ?";
+        $stmt = mysqli_prepare($link, $query);
+        
+        if ($stmt) {
+            mysqli_stmt_bind_param($stmt, "i", $book_id);
+            if (mysqli_stmt_execute($stmt)) {
+                echo "<script>alert('Book deleted successfully!'); window.location.href='dashboard.php';</script>";
+            } else {
+                echo "<script>alert('Error deleting book!'); window.location.href='dashboard.php';</script>";
+            }
+            mysqli_stmt_close($stmt);
+        } else {
+            echo "<script>alert('Failed to prepare the statement!'); window.location.href='dashboard.php';</script>";
+        }
     } else {
-        echo "<script>alert('Error deleting book!'); window.location.href='dashboard.php';</script>";
+        echo "<script>alert('No book selected for deletion!'); window.location.href='dashboard.php';</script>";
     }
-} else {
-    echo "<script>alert('No book selected for deletion!'); window.location.href='dashboard.php';</script>";
-}
 }
 ?>
-
-

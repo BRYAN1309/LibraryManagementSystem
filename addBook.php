@@ -19,20 +19,12 @@
             <div class="p-5">
                <div class="flex items-center mb-6">
                   <h1 class="text-5xl font-bold">LMS</h1>
-                  <div class="ml-4">
-                     <p class="text-sm">Welcome,</p>
-                  </div>
                </div>
                <ul class="space-y-4">
                   <li><a href="dashboard.php" class="flex items-center p-2 hover:bg-blue-700 rounded"><i class="fas fa-home w-6"></i><span class="ml-3">Home</span></a></li>
                   <li><a href="addBook.php" class="flex items-center p-2 hover:bg-blue-700 rounded"><i class="fas fa-file-alt w-6"></i><span class="ml-3">Add Book</span></a></li>
-                  <li><a href="#" class="flex items-center p-2 hover:bg-blue-700 rounded"><i class="fas fa-palette w-6"></i><span class="ml-3">UI Elements</span></a></li>
-                  <li><a href="#" class="flex items-center p-2 hover:bg-blue-700 rounded"><i class="fas fa-table w-6"></i><span class="ml-3">Tables</span></a></li>
-                  <li><a href="#" class="flex items-center p-2 hover:bg-blue-700 rounded"><i class="fas fa-chart-bar w-6"></i><span class="ml-3">Data Presentation</span></a></li>
+                  <li><a href="searchBooks.php" class="flex items-center p-2 hover:bg-blue-700 rounded"><i class="fas fa-palette w-6"></i><span class="ml-3">Search Books</span></a></li>
                </ul>
-            </div>
-            <div class="mt-auto p-5">
-               <a href="#" class="flex items-center p-2 hover:bg-blue-700 rounded"><i class="fas fa-sign-out-alt w-6"></i><span class="ml-3">Log out</span></a>
             </div>
          </nav>
          <!-- Main Content -->
@@ -48,7 +40,7 @@
                      </div>
                      <div class="relative z-0 w-full mb-5 group">
                         <input type="file" name="bookImage"  class="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer" placeholder=" " required />
-                        <label  class="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:start-0 rtl:peer-focus:translate-x-1/4 rtl:peer-focus:left-auto peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">Books Name</label>
+                        <label  class="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:start-0 rtl:peer-focus:translate-x-1/4 rtl:peer-focus:left-auto peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">Books Image</label>
                      </div>
                      <div class="relative z-0 w-full mb-5 group">
                         <input type="text" name="author"  class="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer" placeholder=" " required />
@@ -110,7 +102,7 @@ if (isset($_POST["submit"])) {
               VALUES ('$name', '$dst1','$author', '$publisher', '$number_of_page', '$user_id')";
 
     if (mysqli_query($link, $query)) {
-        echo "<script>alert('Book Added Successfully!'); window.location.href='addBook.php';</script>";
+        echo "<script>alert('Book Added Successfully!'); window.location.href='dashboard.php';</script>";
     } else {
         echo "Error: " . mysqli_error($link); // Show SQL error
     }

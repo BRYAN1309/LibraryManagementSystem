@@ -42,7 +42,7 @@ if (!$book) {
                 <tr><th class="px-6 py-3">Publisher</th><td><?php echo $book['publisher']; ?></td></tr>
                 <tr><th class="px-6 py-3">Number of Pages</th><td><?php echo $book['number_of_page']; ?></td></tr>
             </table>
-            <a href="dashboard.php" class="text-blue-500 hover:underline mt-4 inline-block">Kembali ke Dashboard</a>
+            <a href="dashboard.php" class="text-blue-500 hover:underline mt-4 inline-block">Dashboard-></a>
         </div>
     </div>
 </body>
